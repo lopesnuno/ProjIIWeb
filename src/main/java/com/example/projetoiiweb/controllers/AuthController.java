@@ -37,7 +37,7 @@ public class AuthController {
                 model.addAttribute("isLoggedIn", true);
                 model.addAttribute("user", currentUser);
 
-                return "redirect:/atividades";
+                return "redirect:/products";
             }
             return "redirect:/error";
         }
