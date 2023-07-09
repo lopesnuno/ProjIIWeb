@@ -1,8 +1,10 @@
 package com.example.projetoiiweb.repository;
 
 import com.example.projetoiiweb.models.Cliente;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends CrudRepository<Cliente, String> {
+import java.util.Optional;
 
+public interface UserRepository extends JpaRepository<Cliente, String> {
+    Optional<Cliente> findUserByUsername(String username);
 }
