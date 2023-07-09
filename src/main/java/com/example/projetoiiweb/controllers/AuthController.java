@@ -45,8 +45,10 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public String logout(Model model){
+    public String logout(Model model, HttpSession session){
         model.addAttribute("isLoggedIn", false);
+        session.setAttribute("isLoggedIn", false);
+
         return "redirect:/login";
     }
 }

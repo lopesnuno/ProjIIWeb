@@ -29,7 +29,7 @@ public class ProductService implements ProductServiceI {
 
     @Override
     public Optional<Produto> findProdutoById(String id) {
-        return Optional.empty();
+        return productRepository.findById(id);
     }
 
     private Produto mapToProduto(Produto product) {

@@ -25,11 +25,10 @@
                 <td th:text="${p.marca}"></td>
                 <td th:text="${p.preco + '€'}"></td>
                 <td>
-                    <span class="badge bg-success" th:if="${p.qtd > 0 && p.estado != ''}">Disponível</span>
-                    <span class="badge bg-danger" th:if="${p.qtd == 0}">Fora de stock</span>
+                    <span class="badge bg-success" th:if="${p.qtd > 0 && p.estado != 'deleted'}">Disponível</span>
+                    <span class="badge bg-danger" th:if="${p.qtd == 0 || p.estado == 'deleted'}">Fora de stock</span>
                 </td>
-<!--                <td th:text="${atividade.precoc} + ' / ' + ${atividade.precos} + ' €'"></td>
-                <td>
+                <!--<td>
                     <i class="bi bi-box-arrow-up-right"></i>
                     <a class="btn btn-primary" th:href="@{/atividades/{id}(id=${atividade.idatividade})}"></a>
                 </td>-->

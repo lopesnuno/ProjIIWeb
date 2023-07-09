@@ -12,8 +12,10 @@ public class HomeController {
         Boolean isLoggedIn = session.getAttribute("isLoggedIn") != null && (boolean) session.getAttribute("isLoggedIn");
         if (isLoggedIn) {
             model.addAttribute("isLoggedIn", isLoggedIn);
+            session.setAttribute("isLoggedIn", isLoggedIn);
             return "index";
         }
+
         return "login";
     }
 }

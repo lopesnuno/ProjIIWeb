@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ProductsController {
@@ -21,7 +23,7 @@ public class ProductsController {
     }
 
     @GetMapping("/products")
-    public String listAtividades(Model model, HttpSession session) {
+    public String listProducts(Model model, HttpSession session) {
         boolean isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
         model.addAttribute("isLoggedIn", isLoggedIn);
         if (isLoggedIn) {
@@ -36,5 +38,24 @@ public class ProductsController {
         } else {
             return "redirect:/login";
         }
+    }
+
+    @GetMapping("/products/{id}")
+    public String viewProduct(Model model, @PathVariable("id") String id, HttpSession session) {
+        boolean isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
+        model.addAttribute("isLoggedIn", isLoggedIn);
+        if (isLoggedIn) {
+            try {
+                Optional<Produto> product = productService.findProdutoById(id);
+                model.addAttribute("product", product);
+                session.setAttribute("product", product);
+
+                return "product";
+            } catch (Exception e) {
+                model.addAttribute("error", e.getMessage());
+                return "error";
+            }
+        }
+        return "redirect:/login";
     }
 }
