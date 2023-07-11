@@ -17,6 +17,7 @@
                 <th>Marca</th>
                 <th>Preço</th>
                 <th>Disponibilidade</th>
+                <th>Detalhes</th>
             </tr>
             </thead>
             <tbody>
@@ -28,10 +29,10 @@
                     <span class="badge bg-success" th:if="${p.qtd > 0 && p.estado != 'deleted'}">Disponível</span>
                     <span class="badge bg-danger" th:if="${p.qtd == 0 || p.estado == 'deleted'}">Fora de stock</span>
                 </td>
-                <!--<td>
+                <td>
                     <i class="bi bi-box-arrow-up-right"></i>
-                    <a class="btn btn-primary" th:href="@{/atividades/{id}(id=${atividade.idatividade})}"></a>
-                </td>-->
+                    <a class="btn btn-primary" th:href="@{/products/{id}(id=${p.id})}"></a>
+                </td>
             </tr>
             </tbody>
         </table>
