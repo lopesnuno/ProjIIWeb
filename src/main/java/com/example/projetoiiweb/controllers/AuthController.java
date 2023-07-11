@@ -1,5 +1,6 @@
 package com.example.projetoiiweb.controllers;
 
+import com.example.projetoiiweb.misc.IdGenerator;
 import com.example.projetoiiweb.models.Cliente;
 import com.example.projetoiiweb.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
@@ -37,7 +38,7 @@ public class AuthController {
                 model.addAttribute("isLoggedIn", true);
                 model.addAttribute("user", currentUser);
 
-                return "redirect:/atividades";
+                return "redirect:/products";
             }
             return "redirect:/error";
         }
@@ -45,8 +46,36 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public String logout(Model model){
+    public String logout(Model model, HttpSession session){
         model.addAttribute("isLoggedIn", false);
+        session.setAttribute("isLoggedIn", false);
+
+        return "redirect:/login";
+    }
+
+    @GetMapping("/register")
+    public String register(Model model){
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String register(
+            @RequestParam("username") String username,
+            @RequestParam("tel") Integer phoneNumber,
+            @RequestParam("name") String name,
+            @RequestParam(value = "nif", required = false, defaultValue = "0") Integer nif,
+            @RequestParam("password") String password,
+            Model model
+    ) {
+        Cliente user = new Cliente();
+        user.setId(IdGenerator.generateId());
+        user.setUsername(username);
+        user.setTel(phoneNumber);
+        user.setNome(name);
+        user.setNif(nif);
+        user.setPassword(password);
+        userRepository.save(user);
+
         return "redirect:/login";
     }
 }
