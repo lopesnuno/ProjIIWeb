@@ -34,6 +34,34 @@
         <button type="submit" class="btn btn-primary btn-block">Guardar</button>
         <div th:if="${error}" class="alert alert-danger mt-3" role="alert" th:text="${error}"></div>
     </form>
+    <h3 class="mt-3">Encomendas</h3>
+    <div class="row mt-2">
+        <table class="table table-stripped text-center table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Detalhes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="v : ${user.vendas}">
+                <td th:text="${v.id}"></td>
+                <td th:text="${v.total + '€'}"></td>
+                <td>
+                    <span class="badge bg-success" th:if="${v.estado == 'waiting'}">Em espera</span>
+                    <span class="badge bg-success" th:if="${v.estado == 'processing'}">Em processamento</span>
+                    <span class="badge bg-danger" th:if="${p.estado == 'canceled'}">Fora de stock</span>
+                </td>
+                <td>
+                    <i class="bi bi-box-arrow-up-right"></i>
+                    <a class="btn btn-primary" th:href="@{/products}">Verificar encomenda</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>

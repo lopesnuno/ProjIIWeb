@@ -1,15 +1,14 @@
 package com.example.projetoiiweb.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -26,6 +25,15 @@ public class Venda {
     private Double totalIva;
     private String estado;
 
-    @JoinColumn(referencedColumnName = "id_cliente", nullable = false)
-    private String idCliente;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", nullable = false)
+    private Cliente cliente;
+
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @JoinTable(
+            name = "linha_venda",
+            joinColumns = { @JoinColumn(name = "id_venda") },
+            inverseJoinColumns = { @JoinColumn(name = "id_produto") }
+    )
+    private Set<Produto> produtos = new HashSet<Produto>();
 }

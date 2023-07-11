@@ -12,25 +12,33 @@
     <div class="card">
         <h5 class="card-header text-center">Detalhes</h5>
         <div class="card-body">
-            <table class="table table-striped text-center">
-                <tbody>
-                <tr>
-                    <th scope="row">Nome</th>
-                    <td th:text="${product.orElseThrow().nome}"></td>
-                </tr>
-                <tr>
-                    <th scope="row">Marca</th>
-                    <td th:text="${product.orElseThrow().marca}"></td>
-                </tr>
-                <tr>
-                    <th scope="row">Preço</th>
-                    <td th:text="${product.orElseThrow().preco}"></td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="text-center">
-                <a class="btn btn-primary" th:href="@{/enroll/{id}(id=${atividade.orElseThrow().idatividade})}">Comprar</a>
-            </div>
+            <form>
+                <table class="table table-striped text-center">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Nome</th>
+                        <td th:text="${product.orElseThrow().nome}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Marca</th>
+                        <td th:text="${product.orElseThrow().marca}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Preço</th>
+                        <td th:text="${product.orElseThrow().preco}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Quantidade</th>
+                        <td>
+                            <input id="qty" type="number" class="form-control" name="qty" th:class="w-25"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <a class="btn btn-primary" th:href="@{/products}">Comprar</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>

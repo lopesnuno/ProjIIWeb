@@ -1,6 +1,7 @@
 package com.example.projetoiiweb.controllers;
 
 import com.example.projetoiiweb.models.Cliente;
+import com.example.projetoiiweb.models.Venda;
 import com.example.projetoiiweb.services.UsersService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;

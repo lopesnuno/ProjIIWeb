@@ -1,9 +1,6 @@
 package com.example.projetoiiweb.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +20,16 @@ public class LinhaVenda {
     @Id
     @JoinColumn(referencedColumnName = "id_produto")
     private String idProduto;
+
+    @MapsId
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_venda", nullable = false)
+    private Venda idVenda1;
+
+    @MapsId
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_produto", nullable = false)
+    private Produto idProduto1;
 
     private Integer qtd;
 }
